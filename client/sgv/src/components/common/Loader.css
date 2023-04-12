@@ -1,0 +1,9 @@
+.loader{
+    position: absolute;
+    color: red;
+}
+
+.loader p{
+    position: relative;
+    z-index: 2;
+}

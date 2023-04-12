@@ -1,0 +1,93 @@
+/* table{
+    width: 100%;
+} */
+thead{
+    /* text-align: center; */
+}
+tbody tr{
+    /* text-align: center; */
+}
+
+label{
+    font-weight: bold;
+}
+
+form{
+    /* margin-left: 20%; */
+}
+
+.passwordField{
+    display: flex;
+}
+
+h1{
+    text-align: center;
+}
+
+.container{
+    position: relative;
+}
+
+#create{
+    /* position: absolute;
+    width: 100%;
+    background: rgb(31,185,19);
+    background: linear-gradient(90deg, rgba(31,185,19,1) 0%, rgba(9,121,27,1) 60%, rgba(33,121,5,1) 100%);
+    z-index: 2; */
+}
+
+/* #create form{
+    margin-bottom: 5%;
+    margin-top: 5%;
+} */
+
+/* #display{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+} */
+
+#update{
+    position: absolute;
+    width: 100%;
+    /* background: rgb(31,185,19);
+    background: linear-gradient(90deg, rgba(31,185,19,1) 0%, rgba(9,121,27,1) 60%, rgba(33,121,5,1) 100%); */
+    z-index: 2;
+}
+
+#update form {
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.header{
+    /* width: 100%; */
+    display: flex;
+}
+
+.header h1{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.header button{
+    width: 40px;
+    height: 40px;
+}
+
+.add-search-container{
+    display: flex;
+    align-items: center; /* center vertically */
+    justify-content: right; /*center horizontally*/
+    /* height: 100vh; set height of container */
+    padding: 1%;
+}
+
+.add{
+    margin-right: 1%;
+}
+
+.search{
+    display: block;
+    align-items: center;
+}

@@ -1,0 +1,19 @@
+button{
+    margin-left: 2px;
+}
+
+.create{
+    /* left: 0%; */
+}
+
+.displayBillHeader{
+    display: flex;
+}
+
+.generateBill{
+    width: 100%;
+}
+
+.add-search-container{
+    width: 100%;
+}

@@ -1,0 +1,19 @@
+input{
+    display: block;
+}
+.statusLabel{
+    display: block;
+    color: red;
+}
+
+.enableBtn{
+    color: green;
+}
+
+.disableBtn{
+    color: red;
+}
+
+.loader{
+    color: red;
+}
