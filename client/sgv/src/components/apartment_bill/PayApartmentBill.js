@@ -32,6 +32,7 @@ export default function PayApartmentBill(props) {
     }
     return(
         <div>
+            <p>Hello World</p>
             <form onSubmit={payBill}>
                 <div className="form-group">
                     <label>Bill Name</label>
@@ -57,7 +58,7 @@ export default function PayApartmentBill(props) {
                     <label>Paying Amount</label>
                     <input type="number" className="form-control" placeholder="Please enter amount to be paid ..." required onChange={amountPaid}/>
                 </div>
-
+                
                 <div className="form-group mt-2">
                     <button type="submit" className="btn btn-primary">Pay Bill</button>
                     <button className="btn btn-secondary" onClick={()=>props.object.setState({payBill:false})}>Close</button>
