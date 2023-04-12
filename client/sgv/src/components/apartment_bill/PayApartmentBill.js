@@ -32,8 +32,6 @@ export default function PayApartmentBill(props) {
     }
     return(
         <div>
-            <p>Hello World</p>
-            <p>Hello World From Usman</p>
             <form onSubmit={payBill}>
                 <div className="form-group">
                     <label>Bill Name</label>
