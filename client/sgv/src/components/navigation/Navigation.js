@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Loader from '../common/Loader';
 import Logout from '../common/Logout';
 import './Navigation.css';
 function Navigation() {
   const logo = "sohni golf view".toUpperCase();
   const history = useHistory();
   const [isLogout,setIsLogout] = useState(false);
+  const [loader,setLoader] = useState(false);
   const logOut = () => {
     setIsLogout(true);
   }
   const doLogout = (data) => {
     if (data) {
+      setLoader(true);
       localStorage.removeItem('token');
       // history.push('/login');
       window.location.reload(true);
+      setLoader(false);
     } else {
       setIsLogout(false);
     }
@@ -26,11 +30,8 @@ function Navigation() {
         //     <NavLink to="/login">Logout</NavLink>
         // </div>
         <div>
-          <div className="logout">
-            <div className="content">
-              {isLogout ? <Logout onLogout={doLogout}/> : null}
-            </div>
-          </div>
+          
+            
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#" onClick={()=>{
               history.replace("/");
@@ -60,6 +61,8 @@ function Navigation() {
             </ul>
           </div>
         </nav>
+        {isLogout ? <Logout onLogout={doLogout}/> : null}
+        {loader ? <Loader/> : null}
         </div>
     );
 }

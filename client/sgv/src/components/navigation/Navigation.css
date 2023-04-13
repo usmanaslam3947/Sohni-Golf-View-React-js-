@@ -8,16 +8,3 @@ ul li a{
     color: black;
     text-decoration: none;
 }
-
-/* .logout{
-    width: max-content;
-    left: 35%;
-    top: 30%;
-    padding: 10%;
-    justify-content: center;
-    background: rgb(219,219,244);
-    background: linear-gradient(90deg, rgba(219,219,244,1) 0%, rgba(219,219,244,1) 31%, rgba(219,219,244,1) 35%, rgba(219,219,244,1) 100%);
-    position: absolute;
-    text-align: center;
-    z-index: 2;
-} */

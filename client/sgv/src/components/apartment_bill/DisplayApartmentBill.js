@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { React,useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import Loader from '../common/Loader';
 import {getApartmentBill} from './Service';
@@ -19,6 +19,7 @@ export default function DisplayApartmentBill(props) {
 
     return(
         <div>
+            {/* {JSON.stringify(props.object.state.apartmentBills)} */}
             {props.object.state.loader ? <Loader/> : null}
             <h1>{props.object.state.apartmentBills.length > 0 ? props.object.state.apartmentBills[0].apartment.apartment_name:"No Bills"} </h1>
             <table className="table">
@@ -30,6 +31,7 @@ export default function DisplayApartmentBill(props) {
                         <th>Due Date</th>
                         <th>Amount</th>
                         <th>Amount Paid</th>
+                        <th>Paid By</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -43,6 +45,7 @@ export default function DisplayApartmentBill(props) {
                                 <td>{apartmentBill.bill.due_date.slice(0,10)}</td>
                                 <td>{apartmentBill.bill.amount}</td>
                                 <td>{apartmentBill.paidAmount}</td>
+                                <td>{apartmentBill.status == 1 ? apartmentBill.payeeName:"Not Paid Yet"}</td>
                                 <td>
                                     {apartmentBill.status == 1 ? <p style={{color:'green'}}>Paid</p>:<button className="btn btn-success" onClick={()=>{
                                         props.object.setState({selectedApartmentBill:apartmentBill})
