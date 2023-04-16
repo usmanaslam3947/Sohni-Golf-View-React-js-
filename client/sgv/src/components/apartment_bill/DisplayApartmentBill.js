@@ -1,9 +1,11 @@
-import { React,useEffect } from 'react';
+import { React,useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import Loader from '../common/Loader';
+import PrintButton from '../report/PrintButton';
 import {getApartmentBill} from './Service';
 export default function DisplayApartmentBill(props) {
     const {id} = useParams();
+    const [checkedApartments,setCheckedApartments] = useState([]);
     useEffect(()=>{
         getAllApartmentBill();
     },[]);
@@ -17,15 +19,21 @@ export default function DisplayApartmentBill(props) {
         }
     }
 
+    const addCheckedApartments = (checkedApart) => {
+        setCheckedApartments(prevArray => [...prevArray,checkedApart]);
+    }
+
     return(
         <div>
             {/* {JSON.stringify(props.object.state.apartmentBills)} */}
+            <PrintButton checkedApartment={checkedApartments}/>
             {props.object.state.loader ? <Loader/> : null}
             <h1>{props.object.state.apartmentBills.length > 0 ? props.object.state.apartmentBills[0].apartment.apartment_name:"No Bills"} </h1>
             <table className="table">
                 <thead>
                     <tr>
                         {/* <th>Apartment Name</th> */}
+                        <th></th>
                         <th>Bill Name</th>
                         <th>Created Date</th>
                         <th>Due Date</th>
@@ -40,6 +48,7 @@ export default function DisplayApartmentBill(props) {
                         return(
                             <tr>
                                 {/* <td>{apartmentBill.apartment.apartment_name}</td> */}
+                                <td><input type="checkbox" onChange={()=>addCheckedApartments(apartmentBill)}/></td>
                                 <td>{apartmentBill.bill.type}</td>
                                 <td>{apartmentBill.bill.created_date.slice(0,10)}</td>
                                 <td>{apartmentBill.bill.due_date.slice(0,10)}</td>

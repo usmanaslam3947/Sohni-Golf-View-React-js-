@@ -1,0 +1,23 @@
+.report-container{
+    display: block;
+    width: 100%;
+}
+
+.report-heading{
+    width: 100%;
+    text-align: center;
+}
+
+.print-date-time{
+    width: 100%;
+    text-align: right;
+}
+
+.report-content{
+    width: 100%;
+    display: flex;
+}
+
+.report-content-heading{
+    width: 50%;
+}

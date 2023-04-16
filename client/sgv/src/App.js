@@ -4,6 +4,7 @@ import Router from './components/router/Router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Redirect, useHistory } from 'react-router-dom';
 import Login from './components/login/Login';
+import ReportComponent from './components/report/ReportComponent';
 
 function App () {
   const [login,setLogin] = useState(false);
@@ -18,6 +19,7 @@ function App () {
     },[]);
     return(
       <div>
+        <ReportComponent/>
         {login ? <Router/>:<Login />}
         
       </div>
