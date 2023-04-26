@@ -109,8 +109,9 @@ export default function DisplayBill(props) {
                                 <td>{bill.id}</td>
                                 <td>{bill.type}</td>
                                 <td>{bill.amount}</td>
-                                <td>{bill.created_date.slice(0,10)}</td>
-                                <td>{bill.due_date.slice(0,10)}</td>
+                                <td>{new Date(bill.created_date).getDate()}  {new Date(bill.created_date).toLocaleString("default", { month: "long" })} {new Date(bill.created_date).getFullYear()}</td>
+                                <td>{new Date(bill.due_date).getDate()}  {new Date(bill.due_date).toLocaleString("default", { month: "long" })} {new Date(bill.due_date).getFullYear()}</td>
+                                {/* <td>{bill.due_date.slice(0,10)}</td> */}
                                 <td>
                                     <button onClick={()=>updateBill(bill)} className="btn btn-warning">Update</button>
                                     {bill.status === 1 ? <button className="btn btn-danger" onClick={()=>onChangeBillStatus(bill,0)}>Inactive</button> : <button className="btn btn-success" onClick={()=>onChangeBillStatus(bill,1)}>Active</button>}

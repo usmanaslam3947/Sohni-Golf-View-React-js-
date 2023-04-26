@@ -1,11 +1,13 @@
 package com.sohnigolfview.server.persistence.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.sql.Blob;
 
 
 @Entity
@@ -44,6 +46,18 @@ public class ApartmentBill implements Serializable {
 
     @Column(name = "payee_cnic")
     private String payeeCnic;
+
+    @Lob
+    @Column(name = "cnic_image",columnDefinition = "LONGTEXT")
+    private String cnicImage;
+
+    public String getCnicImage() {
+        return cnicImage;
+    }
+
+    public void setCnicImage(String cnicImage) {
+        this.cnicImage = cnicImage;
+    }
 
     @Column(name = "status")
     private Integer status;

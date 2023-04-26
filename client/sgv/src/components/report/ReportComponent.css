@@ -1,6 +1,8 @@
 .report-container{
     display: block;
     width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .report-heading{
@@ -19,5 +21,43 @@
 }
 
 .report-content-heading{
+    width: 50%;
+}
+
+.report-container-heading{
+    width: 100%;
+    background-color: grey;
+    text-align: center;
+}
+
+.report-content-container{
+    display: flex;
+    width: 100%;
+}
+
+.left-report-content{
+    width: 50%;
+}
+.right-report-content{
+    width: 50%;
+}
+.right-report-content div{
+    display: flex;
+    border: 1px solid grey;
+}
+.right-report-content div label{
+    width: 50%;
+}
+
+.right-report-content div img{
+    width: 200px;
+    height: 100px;
+}
+
+.left-report-content div{
+    display: flex;
+    border: 1px solid grey;
+}
+.left-report-content div label{
     width: 50%;
 }

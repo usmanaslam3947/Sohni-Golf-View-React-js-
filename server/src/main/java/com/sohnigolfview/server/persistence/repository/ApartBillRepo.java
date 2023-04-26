@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface ApartBillRepo extends JpaRepository<ApartmentBill, Integer> {
-    @Query(value = "select ab.id,ab.apartment_id,a.apartment_name,ab.bill_id,b.type,b.due_date,ab.status,b.created_date,b.amount,ab.paid_amount,ab.payee_cnic,ab.payee_name,ab.system_user from apartment_bills ab inner join apartments a on ab.apartment_id = a.id inner join bills b on ab.bill_id = b.id",nativeQuery = true)
+    @Query(value = "select ab.id,ab.apartment_id,a.apartment_name,ab.bill_id,b.type,b.due_date,ab.status,b.created_date,b.amount,ab.paid_amount,ab.payee_cnic,ab.payee_name,ab.system_user,ab.cnic_image from apartment_bills ab inner join apartments a on ab.apartment_id = a.id inner join bills b on ab.bill_id = b.id",nativeQuery = true)
     List<ApartmentBill> getAllApartBill();
 
     @Query(value = "select ab.id,ab.apartment_id,a.apartment_name,ab.bill_id,b.type,b.due_date,ab.status,b.created_date,b.amount,ab.paid_amount from apartment_bills ab inner join apartments a on ab.apartment_id = a.id inner join bills b on ab.bill_id = b.id where ab.apartment_id =:apartId and ab.status=:status",nativeQuery = true)

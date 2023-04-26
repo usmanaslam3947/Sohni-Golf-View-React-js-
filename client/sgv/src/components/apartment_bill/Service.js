@@ -9,7 +9,7 @@ export async function getApartmentBill() {
     return result;
 }
 
-export async function payApartmentBill(id,apartId,billId,status,amount,user,payeeName,payeeCnic) {
+export async function payApartmentBill(id,apartId,billId,status,amount,user,payeeName,payeeCnic,base64Image) {
     const result = await axios.post('http://localhost:8081/payApartmentBill',{
         "id":id,
         "apartmentId":apartId,
@@ -18,7 +18,8 @@ export async function payApartmentBill(id,apartId,billId,status,amount,user,paye
         "paidAmount":amount,
         "systemUser":user,
         "payeeName":payeeName,
-        "payeeCnic":payeeCnic
+        "payeeCnic":payeeCnic,
+        "cnicImage":base64Image
     }).then(response=>{
         return response;
     }).catch(error=>{

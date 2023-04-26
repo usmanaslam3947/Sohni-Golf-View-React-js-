@@ -92,6 +92,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                         apartmentBill.setBillId(bill.getId());
                         apartmentBill.setStatus(0);
                         apartmentBill.setPaidAmount(0);
+                        apartmentBill.setCnicImage(null);
                         apartBillRepo.save(apartmentBill);
                     }
                 }
@@ -113,7 +114,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
 
     @Transactional
     @Override
-    public Response payApartmentBills(ApartmentBill model) throws Exception {
+    public Response payApartmentBills(ApartmentBill model) {
         try{
 //            int result = apartBillRepo.payApartmentBill(model.getStatus(), model.getPaidAmount(), model.getId());
             ApartmentBill apartmentBill = entityManager.merge(model);

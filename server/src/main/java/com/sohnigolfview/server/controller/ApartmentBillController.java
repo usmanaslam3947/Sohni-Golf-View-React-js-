@@ -40,7 +40,7 @@ public class ApartmentBillController {
     }
 
     @PostMapping(value = "/payApartmentBill")
-    public Response payApartBill(@RequestBody ApartmentBill apartmentBill) throws Exception{
+    public Response payApartBill(@RequestBody ApartmentBill apartmentBill){
         return apartmentBillService.payApartmentBills(apartmentBill);
     }
 }

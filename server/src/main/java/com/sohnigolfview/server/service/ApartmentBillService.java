@@ -14,5 +14,5 @@ public interface ApartmentBillService {
     Response createApartmentBills(ApartmentBill apartmentBill) throws Exception;
     Response processApartmentBills(String date) throws Exception;
 
-    Response payApartmentBills(ApartmentBill model) throws Exception;
+    Response payApartmentBills(ApartmentBill model);
 }
