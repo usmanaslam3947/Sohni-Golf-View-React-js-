@@ -19,8 +19,15 @@ export default function DisplayApartmentBill(props) {
         }
     }
 
-    const addCheckedApartments = (checkedApart) => {
-        setCheckedApartments(prevArray => [...prevArray,checkedApart]);
+    const addCheckedApartments = (e,checkedApart) => {
+        if (e.target.checked) {
+            setCheckedApartments(prevArray => [...prevArray,checkedApart]);
+        }else{
+            const index = checkedApartments.indexOf(checkedApart);
+            if (index > -1) { 
+                setCheckedApartments(checkedApartments.filter(item => item !== checkedApart));
+            }
+        }
     }
 
     return(
@@ -48,11 +55,11 @@ export default function DisplayApartmentBill(props) {
                         return(
                             <tr>
                                 {/* <td>{apartmentBill.apartment.apartment_name}</td> */}
-                                <td><input type="checkbox" onChange={()=>addCheckedApartments(apartmentBill)}/></td>
-                                <td>{apartmentBill.bill.type}</td>
+                                <td><input type="checkbox" onChange={(e)=>addCheckedApartments(e,apartmentBill)}/></td>
+                                <td>{apartmentBill.bill.billType.type}</td>
                                 <td>{apartmentBill.bill.created_date.slice(0,10)}</td>
                                 <td>{apartmentBill.bill.due_date.slice(0,10)}</td>
-                                <td>{apartmentBill.bill.amount}</td>
+                                <td>{apartmentBill.amount}</td>
                                 <td>{apartmentBill.paidAmount}</td>
                                 <td>{apartmentBill.status == 1 ? apartmentBill.payeeName:"Not Paid Yet"}</td>
                                 <td>

@@ -26,10 +26,10 @@ public class BaseServiceImplementation implements BaseService {
         response.getMessage().setDescription(Config.errMsg);
     }
 
-    public void setSuccessMsg(){
+    public void setSuccessMsg(String desc){
         response.getMessage().setCode(Config.successCode);
         response.getMessage().setMessage(Config.successMsg);
-        response.getMessage().setDescription(Config.successMsg);
+        response.getMessage().setDescription(desc);
     }
 
     public void setErrorMsg(){

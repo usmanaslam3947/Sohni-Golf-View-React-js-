@@ -29,7 +29,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
             List<Apartment> apartments =  apartmentRepo.findAll();
             if (apartments.size() > 0) {
                 response.setData(apartments);
-                setSuccessMsg();
+                setSuccessMsg("Apartment successfully retrieved");
             } else {
                 setErrorMsg();
             }
@@ -46,7 +46,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
         try{
             if (apartment != null){
                 response.setData(apartment);
-                setSuccessMsg();
+                setSuccessMsg("Apartment successfully retrieved by status");
             }else{
                 setErrorMsg();
             }
@@ -63,7 +63,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
             List<Apartment> apartmentsByStatus = apartmentRepo.getApartmentsByStatus(model.getStatus());
             if (apartmentsByStatus != null){
                 response.setData(apartmentsByStatus);
-                setSuccessMsg();
+                setSuccessMsg("Apartment successfully retrieved by status");
             }else{
                 setErrorMsg();
             }
@@ -79,7 +79,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
             Apartment newApartment = apartmentRepo.save(apartment);
             if (newApartment != null) {
                 response.setData(apartmentRepo.findAll());
-                setSuccessMsg();
+                setSuccessMsg("Apartment successfully created");
             } else {
                 setErrorMsg();
             }
@@ -98,7 +98,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
             if (updatedApartment != null){
 //                response.setData(updatedApartment);
                 response.setData(apartmentRepo.findAll());
-                setSuccessMsg();
+                setSuccessMsg("Apartment updated successfully");
             }else{
                 setErrorMsg();
             }
@@ -114,7 +114,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
             int changedApartment = apartmentRepo.changeApartmentStatus(apartment.getStatus(), apartment.getId());
             if (changedApartment > 0){
                 response.setData(apartmentRepo.findAll());
-                setSuccessMsg();
+                setSuccessMsg("Apartment status successfully changed");
             }else{
                 setErrorMsg();
             }

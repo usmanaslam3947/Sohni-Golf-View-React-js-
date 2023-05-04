@@ -7,8 +7,8 @@ export default function Logout(props) {
     return (
         <div className="logout">
             <h3>Are you sure to logout ?</h3>
-            <button className="btn btn-danger" onClick={()=>logout(true)}>Yes</button>
-            <button className="btn btn-secondary" onClick={()=>logout(false)}>No</button>
+            <button className="btn btn-danger" onClick={()=>logout(true)}>Logout</button>
+            <button className="btn btn-secondary" onClick={()=>logout(false)}>Continue Session</button>
         </div>
     )
 }

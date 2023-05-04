@@ -22,7 +22,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             List<User> users = userRepo.getAllUsers();
             if (users.size() > 0){
                 response.setData(users);
-                setSuccessMsg();
+                setSuccessMsg("Users retrieved successfully.");
             }else {
                 setErrorMsg();
             }
@@ -38,7 +38,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             User users = userRepo.getUserById(model.getId());
             if (users != null){
                 response.setData(users);
-                setSuccessMsg();
+                setSuccessMsg("Users retrieved successfully by id.");
             }else {
                 setErrorMsg();
             }
@@ -54,7 +54,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             List<User> users = userRepo.getUsersByStatus(model.getStatus());
             if (users.size() > 0){
                 response.setData(users);
-                setSuccessMsg();
+                setSuccessMsg("Users retrieved successfully by status.");
             }else {
                 setErrorMsg();
             }
@@ -71,7 +71,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             User users = userRepo.save(model);
             if (users != null){
                 response.setData(userRepo.findAll());
-                setSuccessMsg();
+                setSuccessMsg("User created successfully.");
             }else {
                 setErrorMsg();
             }
@@ -88,7 +88,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             User users = entityManager.merge(model);
             if (users != null){
                 response.setData(users);
-                setSuccessMsg();
+                setSuccessMsg("User updated successfully.");
             }else {
                 setErrorMsg();
             }
@@ -104,7 +104,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             int userStatus = userRepo.changeUserStatus(model.getStatus(), model.getId());
             if (userStatus > 0){
                 response.setData(userRepo.getUserById(model.getId()));
-                setSuccessMsg();
+                setSuccessMsg("User status changed successfully.");
             }else {
                 setErrorMsg();
             }
@@ -120,7 +120,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
             List<User> users = userRepo.login(model.getUser_name(), model.getPassword());
             if (users.size() > 0){
                 response.setData(users);
-                setSuccessMsg();
+                setSuccessMsg("User login successfully.");
             }else{
                 setErrorMsg();
             }

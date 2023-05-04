@@ -21,6 +21,9 @@ public class BillController extends BaseController{
     @Autowired
     private BillService billService;
 
+
+
+
     @PostMapping(value = "/getBills")
     public Response getBill() throws Exception {
 //        return billService.getAllBill();
@@ -42,7 +45,7 @@ public class BillController extends BaseController{
 
         /* Making due date 5 day ahead of today's */
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR,5);
+        calendar.add(Calendar.DAY_OF_YEAR,35);
         bill.setDue_date(calendar.getTime());
         /* Making due date 5 day ahead of today's */
 

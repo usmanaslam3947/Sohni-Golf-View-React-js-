@@ -34,7 +34,7 @@ export default function DisplayBill(props) {
         const targetValue = e.target.value;
         // this.setState({id:targetId});
         // const filteredArray = bills.filter(item=> item.id==targetValue || item.type == targetValue || item.type.toLowerCase() == targetValue || item.type.toUpperCase() == targetValue);
-        const filteredArray = props.object.state.bills.filter(item=> item.id==targetValue || item.type == targetValue || item.type.toLowerCase() == targetValue || item.type.toUpperCase() == targetValue);
+        const filteredArray = props.object.state.bills.filter(item=> item.id==targetValue || item.billType.type == targetValue || item.billType.type.toLowerCase() == targetValue || item.billType.type.toUpperCase() == targetValue);
         if(filteredArray.length > 0 && targetValue!=""){
             props.object.setState({bills:filteredArray});
             // setBills(filteredArray);
@@ -47,7 +47,7 @@ export default function DisplayBill(props) {
         const targetValue = e.target.value;
         // this.setState({id:targetId});
         // const filteredArray = bills.filter(item=> item.status==targetValue);
-        const filteredArray = props.object.state.bills.filter(item=> item.status==targetValue);
+        const filteredArray = props.object.state.bills.filter(item => item.status==targetValue);
         if(filteredArray.length > 0 && targetValue!=""){
             // setBills(filteredArray);
             props.object.setState({bills:filteredArray});
@@ -64,13 +64,17 @@ export default function DisplayBill(props) {
             setTempBills(res.data.data);
             // setBills(res.data.data);
             props.object.setState({bills:res.data.data});
+        }else{
+            props.object.state.failureStatus = true;
+            props.object.state.msg = res.data.message.message;
+            props.object.state.desc = res.data.message.description;
         }
     }
     return(
         <div>
             <div className="displayBillHeader">
                 <div className="generateBill">
-                    <GenerateBill tempBills={tempBills}/>
+                    <GenerateBill object={props.object} tempBills={tempBills}/>
                 </div>
                 <div className="add-search-container">
                         <div className="add">
@@ -107,7 +111,7 @@ export default function DisplayBill(props) {
                         return (
                             <tr>
                                 <td>{bill.id}</td>
-                                <td>{bill.type}</td>
+                                <td>{bill.billType.type}</td>
                                 <td>{bill.amount}</td>
                                 <td>{new Date(bill.created_date).getDate()}  {new Date(bill.created_date).toLocaleString("default", { month: "long" })} {new Date(bill.created_date).getFullYear()}</td>
                                 <td>{new Date(bill.due_date).getDate()}  {new Date(bill.due_date).toLocaleString("default", { month: "long" })} {new Date(bill.due_date).getFullYear()}</td>

@@ -23,7 +23,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
 
             if (bills.size() > 0){
                 response.setData(bills);
-                setSuccessMsg();
+                setSuccessMsg("Bills retrieved successfully");
             }else{
                 setErrorMsg();
             }
@@ -39,7 +39,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
             Bill bill = billRepo.getBillById(model.getId());
             if (bill != null){
                 response.setData(bill);
-                setSuccessMsg();
+                setSuccessMsg("Bills successfully retrieved by id.");
             }else{
                 setErrorMsg();
             }
@@ -55,7 +55,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
             List<Bill> bills = billRepo.getBillsByStatus(model.getStatus());
             if (bills.size() > 0){
                 response.setData(bills);
-                setSuccessMsg();
+                setSuccessMsg("Bills successfully retrieved by status.");
             }else{
                 setErrorMsg();
             }
@@ -71,7 +71,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
             Bill bill = billRepo.save(model);
             if (bill != null){
                 response.setData(billRepo.getAllBills());
-                setSuccessMsg();
+                setSuccessMsg("Bill created successfully.");
             }else{
                 setErrorMsg();
             }
@@ -90,7 +90,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
 //            Bill bill = entityManager.merge(model);
             if (billStatus > 0 ){
                 response.setData(billRepo.getBillById(model.getId()));
-                setSuccessMsg();
+                setSuccessMsg("Bill updated successfully.");
             }else{
                 setErrorMsg();
             }
@@ -108,7 +108,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
 //                response.setData(billRepo.getBillById(model.getId()));
                 response.setData(billRepo.getAllBills());
 
-                setSuccessMsg();
+                setSuccessMsg("Bill status changed successfully.");
             }else{
                 setErrorMsg();
             }

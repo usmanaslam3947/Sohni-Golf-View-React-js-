@@ -19,8 +19,7 @@ function App () {
     },[]);
     return(
       <div>
-        <ReportComponent/>
-        {login ? <Router/>:<Login />}
+        {login ? <Router login={login}/>:<Login />}
         
       </div>
     );  

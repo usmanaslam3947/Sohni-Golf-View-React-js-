@@ -6,6 +6,8 @@ import Navigation from "../navigation/Navigation";
 import CreateApartment from './CreateApartment';
 import DisplayApartment from './DisplayApartment';
 import UpdateApartment from './UpdateApartment';
+import Failure from "../common/Failure";
+import Success from "../common/Success";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -17,9 +19,14 @@ class Apartment extends React.Component {
             loader: false,
             apartments:null,
             tempApartment:[],
+            apartmentUpdate:{},
             apartment_name: "",
             contact: "",
             status: 0,
+            successStatus:false,
+            failureStatus:true,
+            msg:"",
+            desc:"",
             person_name: "",
             password: "",
             eyeIcon:false,
@@ -28,7 +35,7 @@ class Apartment extends React.Component {
             display:true,
             id:0,
             confirmPassword:""};
-        this.getAllApartments();
+        // this.getAllApartments();
     }
     componentDidMount(){
 
@@ -48,16 +55,16 @@ class Apartment extends React.Component {
     setConfirmPassword = (e) => {
         this.setState({confirmPassword:e.target.value});
     }
-    getAllApartments = () => {
-        this.showLoader();
-        axios.post('http://localhost:8081/getApartments',{}).then(response => {
-            this.hideLoader();
-            this.setState({tempApartment:response.data.data,
-            apartments:response.data.data});
-        }).catch(error => {
-            console.log(error);
-        });
-    }
+    // getAllApartments = () => {
+    //     this.showLoader();
+    //     axios.post('http://localhost:8081/getApartments',{}).then(response => {
+    //         this.hideLoader();
+    //         this.setState({tempApartment:response.data.data,
+    //         apartments:response.data.data});
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
+    // }
 
     showLoader = () => {
         this.setState({loader:true});
@@ -126,23 +133,16 @@ class Apartment extends React.Component {
     //     alert(apartment.apartment_name);
     // }
 
-    setId(event){
-        const targetId = event.target.value;
-        // this.setState({id:targetId});
-        const filteredArray = this.state.tempApartment.filter(item=> item.contact==targetId || item.apartment_name == targetId || item.apartment_name.toLowerCase() == targetId || item.apartment_name.toUpperCase() == targetId || item.person_name == targetId);
-        if(filteredArray.length > 0 && targetId!=""){
-            this.setState({apartments:filteredArray});
-        }else{
-            this.setState({apartments:this.state.tempApartment});
-        }
-
-        // for (let index = 0; index < this.state.apartments.length; index++) {
-        //     if (this.state.apartments[index] == targetId) {
-        //         this.state.apartments = this.state.apartments[index];
-        //         return;
-        //     }
-        // }
-    }
+    // setId(event){
+    //     const targetId = event.target.value;
+    //     // this.setState({id:targetId});
+    //     const filteredArray = this.state.tempApartment.filter(item=> item.contact==targetId || item.apartment_name == targetId || item.apartment_name.toLowerCase() == targetId || item.apartment_name.toUpperCase() == targetId || item.person_name == targetId);
+    //     if(filteredArray.length > 0 && targetId!=""){
+    //         this.setState({apartments:filteredArray});
+    //     }else{
+    //         this.setState({apartments:this.state.tempApartment});
+    //     }
+    // }
 
     setApartmentToUpdate(apart){
         this.setState({update:true,display:false});
@@ -153,6 +153,7 @@ class Apartment extends React.Component {
         this.setState({status:apart.status});
         this.setState({password:apart.password});
         this.setState({confirmPassword:apart.password});
+        // this.setState({apartmentUpdate:apart});
     }
     setCreatedApartment = (data) =>{
         this.setState({apartments:data});
@@ -160,48 +161,37 @@ class Apartment extends React.Component {
     setUpdatedApartment = (data) =>{
         this.setState({apartments:data});
     }
-    changeApartmentStatus(apart,status){
-        this.showLoader();
-        axios.post('http://localhost:8081/changeApartmentStatus',{
-            "id":apart.id,
-            "status":status
-        }).then(response => {
-            this.hideLoader();
-            this.setState({apartments:response.data.data});
-        }).catch(error => {
-            console.log(error);
-        });
-    }
+    // changeApartmentStatus(apart,status){
+    //     this.showLoader();
+    //     axios.post('http://localhost:8081/changeApartmentStatus',{
+    //         "id":apart.id,
+    //         "status":status
+    //     }).then(response => {
+    //         this.hideLoader();
+    //         this.setState({apartments:response.data.data});
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
+    // }
 
     getApartmentByStatus(){
-        // this.showLoader();
-        // axios.post('http://localhost:8081/getApartmentsByStatus',{
-        //     "status":this.state.status
-        // }).then(response => {
-        //     this.hideLoader();
-        //     this.setState({apartments:response.data.data});
-        // }).catch(error => {
-        //     console.log(error);
-        // });
         const filteredArray = this.state.tempApartment.filter(item=>item.status == this.state.status);
         if(filteredArray.length > 0){
             this.setState({apartments:filteredArray});
         }else{
             this.setState({apartments:this.state.tempApartment});
         }
-
     }
 
-    setStatus(e){
-        // this.setState({status:e.target.value});
-        const targetStatus = e.target.value;
-        const filteredArray = this.state.tempApartment.filter(item=>item.status == targetStatus);
-        if(filteredArray.length > 0 && targetStatus!=""){
-            this.setState({apartments:filteredArray});
-        }else{
-            this.setState({apartments:this.state.tempApartment});
-        }
-    }
+    // setStatus(e){
+    //     const targetStatus = e.target.value;
+    //     const filteredArray = this.state.tempApartment.filter(item=>item.status == targetStatus);
+    //     if(filteredArray.length > 0 && targetStatus!=""){
+    //         this.setState({apartments:filteredArray});
+    //     }else{
+    //         this.setState({apartments:this.state.tempApartment});
+    //     }
+    // }
 
     closeCreate(event){
         this.setState({create:event,display:!event});
@@ -214,25 +204,12 @@ class Apartment extends React.Component {
         return (
             <>
                 <Navigation/>
+                <Success object={this} />
+                <Failure object={this}/>
 
                 {this.state.loader ? <Loader/>:null}
 
-                {this.state.display ? <div className="add-search-container">
-                    <div className="add">
-                        <button className="btn btn-primary" onClick={()=>{
-                            this.setState({create:true,display:false,update:false})
-                            }}>Add Apartment</button>
-                    </div>
-
-                    <div className="search">
-                        {/* <h1>Get Apartment By ID</h1> */}
-                        <input className="form-control mt-1" type="text" placeholder="Enter Apartment ID" onChange={(e)=>this.setId(e)} />
-                        {/* <button className="btn btn-primary mt-2" onClick={() => {this.getApartmentById()}}>Search By Id</button> */}
-                        {/* <h1>Get Apartment By Status</h1> */}
-                        <input className="form-control mt-1" type="number" placeholder="Please Enter status ... " onChange={(e)=>this.setStatus(e)}/>
-                        {/* <button onClick={() => this.getApartmentByStatus()}>Get Apartment By Status</button> */}
-                    </div>
-                </div> : null }
+                
                 
 
 

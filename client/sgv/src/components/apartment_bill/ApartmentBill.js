@@ -17,7 +17,8 @@ class ApartmentBill extends React.Component{
             displayBill:false,
             successStatus:false,
             failureStatus:false,
-            msg:''
+            msg:'',
+            desc:''
         }
         // this.getAllApartmentBill();
     }
@@ -33,8 +34,8 @@ class ApartmentBill extends React.Component{
             <div>
                 <Navigation/>
                 {this.state.loader ? <Loader/>:null}
-                {this.state.successStatus ? <Success msg={this.state.msg}/>:null}
-                {this.state.failureStatus ? <Failure msg={this.state.msg}/>:null}
+                <Success object={this}/>
+                <Failure object={this}/>
                 <div className="container">
                     {
                         this.state.payBill ? 

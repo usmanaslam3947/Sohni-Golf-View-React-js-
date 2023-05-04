@@ -1,5 +1,8 @@
 package com.sohnigolfview.server.persistence.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,8 +14,21 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type",insertable = false,updatable = false)
+    @Fetch(FetchMode.JOIN)
+    private BillType billType;
+
+    public BillType getBillType() {
+        return billType;
+    }
+
+    public void setBillType(BillType billType) {
+        this.billType = billType;
+    }
+
     @Column(name = "type")
-    private String type;
+    private Integer type;
 
     @Column(name = "amount")
     private Long amount;
@@ -26,6 +42,7 @@ public class Bill {
     @Column(name = "status")
     private Integer status;
 
+
     public Integer getId() {
         return id;
     }
@@ -34,11 +51,11 @@ public class Bill {
         this.id = id;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

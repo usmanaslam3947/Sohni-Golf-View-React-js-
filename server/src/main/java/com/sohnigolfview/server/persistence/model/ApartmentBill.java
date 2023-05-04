@@ -65,6 +65,16 @@ public class ApartmentBill implements Serializable {
     @Column(name = "paid_amount")
     private Integer paidAmount;
 
+    @Column(name = "amount")
+    private Long amount;
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
 
     public Integer getStatus() {
         return status;

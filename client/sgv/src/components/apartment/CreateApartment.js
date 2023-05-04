@@ -5,8 +5,6 @@ import {useState} from 'react';
 import OpenEye from '../../assets/eye.png';
 import CloseEye from '../../assets/hide.png';
 import './Apartment.css';
-import Success from '../common/Success';
-import Failure from '../common/Failure';
 
 function CreateApartment (props){
     const [apartments,setApartments] = useState([]);
@@ -17,35 +15,7 @@ function CreateApartment (props){
     const [confirmPassword,setConfirmPassword] = useState('');
     const [passwordEyeIcon,setPasswordEyeIcon] = useState(false);
     const [confirmPasswordEyeIcon,setConfirmPasswordEyeIcon] = useState(false);
-    const [successStatus,setSuccessStatus] = useState(false);
-    const [failureStatus,setFailureStatus] = useState(false);
-    // constructor(props){
-    //     super(props);
-        // props.object.state = {loader: false,apartments:[],
-        //     apartment_name: "",
-        //     contact: "",
-        //     status: 0,
-        //     person_name: "",
-        //     password: "",
-        //     eyeIcon:false
-        // ,id:0,confirmPassword:""};
-    // }
-
-    // setApartmentName = (e) => {
-    //     props.object.setState({apartment_name:e.target.value});
-    // }
-    // setContact = (e) => {
-    //     props.object.setState({contact:e.target.value});
-    // }
-    // setPersonName = (e) => {
-    //    props.object.setState({person_name:e.target.value});
-    // }
-    // setPassword = (e) => {
-    //     props.object.setState({password:e.target.value});
-    // }
-    // setConfirmPassword = (e) => {
-    //     props.object.setState({confirmPassword:e.target.value});
-    // }
+    const [maxLength,setMaxLength] = useState(11);
 
     const createApartment=(e)=>{
         e.preventDefault();
@@ -58,15 +28,12 @@ function CreateApartment (props){
             "password": password
         }).then(response => {
             props.object.hideLoader();
-            if (response.data.message.code ===200) {
-                setSuccessStatus(true);
+            if (response.data.message.code === 200) {
+                props.object.setState({successStatus:true,msg:response.data.message.message,desc:response.data.message.description});                
                 props.createdApartment(response.data.data);
             }else{
-                setFailureStatus(true);
+                props.object.setState({failureStatus:true,msg:response.data.message.message,desc:response.data.message.description});
             }
-            // alert(JSON.stringify(response));
-            // apartment.setState({apartments:})
-            // props.object.setState({apartments:response.data.data});
         }).catch(error => {
             console.log(error);
         });
@@ -81,10 +48,20 @@ function CreateApartment (props){
     // }
     
     // render(){
+
+    const handleContactChange = (e) => {
+        const value = e.target.value;
+            // Remove any non-numeric characters
+        const numericValue = value.replace(/[^0-9]/g, '');
+
+        // Limit the length of the numeric value to 11 characters
+        const limitedValue = numericValue.slice(0, maxLength);
+
+        // Update the state with the new value
+        setContact(limitedValue);
+    }
         return(
             <>
-                {successStatus ? <Success/>:null}
-                {failureStatus ? <Failure/>:null}
                 <div id="create">
                     <div className="header">
                         <h1>Create Apartment</h1>
@@ -93,22 +70,23 @@ function CreateApartment (props){
                     <form onSubmit={createApartment}>
                         <div className="form-group mt-1">
                             <label>Apartment Name</label>
-                            <input type="text" className="form-control w-75" placeholder="Please Enter Apartment Name" value={apartmentName} onChange={(e)=>setApartmentName(e.target.value)}/>
+                            <input type="text" className="form-control w-75" placeholder="Please Enter Apartment Name" value={apartmentName} onChange={(e)=>setApartmentName(e.target.value)} required/>
                         </div>
                         <div className="form-group mt-1">
                             <label>Person Name</label>
-                            <input type="text" className="form-control w-75" placeholder="Please Enter Person Name" value={personName} onChange={(e)=>setPersonName(e.target.value)}/>
+                            <input type="text" className="form-control w-75" placeholder="Please Enter Person Name" value={personName} onChange={(e)=>setPersonName(e.target.value)} required/>
                         </div>
                         <div className="form-group mt-1">
                             <label>Contact</label>
-                            <input type="text" className="form-control w-75" placeholder="Please Enter Contact Number" value={contact} onChange={(e)=>setContact(e.target.value)}/>
+                            {/* <input type="phone" maxLength={maxLength} className="form-control w-75" placeholder="Please Enter Contact Number" value={contact} onChange={(e)=>setContact(e.target.value)} required/> */}
+                            <input type="tel" maxLength={maxLength} className="form-control w-75" placeholder="Please Enter Contact Number" value={contact} onChange={handleContactChange} required/>
                         </div>
                         <div className="form-group mt-1">
                             <label>Password</label>
                             <div className="passwordField">
                                 {passwordEyeIcon ?
-                                    <input type="text" className="form-control w-75" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)}/> : 
-                                    <input type="password" className="form-control w-75" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)}/>}
+                                    <input type="text" className="form-control w-75" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)} required/> : 
+                                    <input type="password" className="form-control w-75" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>}
                                 {passwordEyeIcon ? <img src={OpenEye} onClick={()=>setPasswordEyeIcon(false)}/> : <img src={CloseEye} onClick={()=>setPasswordEyeIcon(true)}/>}
                             </div>
                         </div>
@@ -116,8 +94,8 @@ function CreateApartment (props){
                             <label>Confirm Password</label>
                             <div className="passwordField">
                                 {confirmPasswordEyeIcon ? 
-                                    <input type="text" className="form-control w-75" placeholder="Confirm password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/> : 
-                                    <input type="password" className="form-control w-75" placeholder="Confirm password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>}
+                                    <input type="text" className="form-control w-75" placeholder="Confirm password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/> : 
+                                    <input type="password" className="form-control w-75" placeholder="Confirm password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/>}
                                 {confirmPasswordEyeIcon ? <img src={OpenEye} onClick={()=>setConfirmPasswordEyeIcon(false)}/> : <img src={CloseEye} onClick={()=>setConfirmPasswordEyeIcon(true)}/>}
                             </div>
                         </div>

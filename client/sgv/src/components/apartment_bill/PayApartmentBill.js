@@ -7,25 +7,28 @@ export default function PayApartmentBill(props) {
     const [base64Image,setBase64Image] = useState('');
     const [systemUser,setSystemUser] = useState(localStorage.getItem('userId'));
     const [billStatus,setBillStatus] = useState(0);
+    const [maxLength,setMaxLength] = useState(13);
     const payBill = async(e) => {
         e.preventDefault();
         // setBillStatus(1);
         // if (payingAmount == props.object.state.selectedApartmentBill.bill.amount) {
         // }
         if (payeeName == "") {
-            props.object.setState({msg:"Please enter payee name ..."});
+            props.object.setState({msg:"Failed !!!",desc:"Please enter payee name."});
             props.object.setState({failureStatus:true});
         }else if (payeeCnic == "") {
-            props.object.setState({msg:"Please enter payee cnic ..."});
+            props.object.setState({msg:"Failed !!!",desc:"Please enter payee cnic."});
             props.object.setState({failureStatus:true});
         }else if (base64Image == "") {
-            const sizeInBytes = (base64Image.length * 6) / 8;
-            if (sizeInBytes > 1048576) {
-                props.object.setState({msg:"Please select correct image ..."});
-                props.object.setState({failureStatus:true});
-            }
-        }else if (payingAmount == "" || payingAmount != props.object.state.selectedApartmentBill.bill.amount) {
-            props.object.setState({msg:"Please enter correct amount to be paid ..."});
+            props.object.setState({msg:"Failed !!!",desc:"Please upload cnic image."});
+            props.object.setState({failureStatus:true});
+            // const sizeInBytes = (base64Image.length * 6) / 8;
+            // if (sizeInBytes > 1048576) {
+            //     props.object.setState({msg:"Please select correct image ..."});
+            //     props.object.setState({failureStatus:true});
+            // }
+        }else if (payingAmount == "" || payingAmount < props.object.state.selectedApartmentBill.amount) {
+            props.object.setState({msg:"Failed !!!",desc:"Please enter correct amount."});
             props.object.setState({failureStatus:true});
         }else {
             props.object.state.loader = true;
@@ -34,13 +37,14 @@ export default function PayApartmentBill(props) {
                     props.object.state.selectedApartmentBill.id,        
                     props.object.state.selectedApartmentBill.apartment.id,
                     props.object.state.selectedApartmentBill.bill.id,
-                    1,payingAmount,systemUser,payeeName,payeeCnic,base64Image);
+                    1,payingAmount,systemUser,payeeName,payeeCnic,base64Image,
+                    props.object.state.selectedApartmentBill.amount);
                 props.object.state.loader = false;
                 if(res.data.message.code===200){
-                    props.object.setState({msg:res.data.message.message});
+                    props.object.setState({msg:res.data.message.message,desc:res.data.message.description});
                     props.object.setState({successStatus:true});
                 }else{
-                    props.object.setState({msg:res.data.message.message});
+                    props.object.setState({msg:res.data.message.message,desc:res.data.message.description});
                     props.object.setState({failureStatus:true});
                 }                
             } catch (error) {
@@ -53,16 +57,17 @@ export default function PayApartmentBill(props) {
     }
     const amountPaid = (e)=>{
         setPayingAmount(e.target.value);
-        if (payingAmount == props.object.state.selectedApartmentBill.bill.amount) {
-            setBillStatus(1);
-        }
+        // if (payingAmount == props.object.state.selectedApartmentBill.amount) {
+        //     setBillStatus(1);
+        // }
     }
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
         if (file && file.size > (1024 * 1024)) {
-            alert("File Size greater");
+            props.object.setState({msg:"Please select image less than 1 MB in size ..."});
+            props.object.setState({failureStatus:true});
         }else{
             if (file) {            
                 reader.readAsBinaryString(file);
@@ -94,16 +99,31 @@ export default function PayApartmentBill(props) {
         //     }
         // }
     };
+
+
+    const handleContactChange = (e) => {
+        const value = e.target.value;
+            // Remove any non-numeric characters
+        const numericValue = value.replace(/[^0-9]/g, '');
+
+        // Limit the length of the numeric value to 11 characters
+        const limitedValue = numericValue.slice(0, maxLength);
+
+        // Update the state with the new value
+        setPayeeCnic(limitedValue);
+    }
+
+
     return(
         <div>
             <form onSubmit={payBill}>
                 <div className="form-group">
                     <label>Bill Name</label>
-                    <p>{props.object.state.selectedApartmentBill.bill.type}</p>
+                    <p>{props.object.state.selectedApartmentBill.bill.billType.type}</p>
                 </div>
                 <div className="form-group">
                     <label>Amount</label>
-                    <p>{props.object.state.selectedApartmentBill.bill.amount}</p>
+                    <p>{props.object.state.selectedApartmentBill.amount}</p>
                 </div>
                 <div className="form-group">
                     <label>Amount Paid</label>
@@ -115,7 +135,7 @@ export default function PayApartmentBill(props) {
                 </div>
                 <div className="form-group">
                     <label>Payee CNIC</label>
-                    <input type="number" maxLength={13} className="form-control" placeholder="Please enter payee cnic ..." required onChange={(e)=>setPayeeCnic(e.target.value)}/>
+                    <input type="number" className="form-control" placeholder="Please enter payee cnic ..." required value={payeeCnic} onChange={handleContactChange}/>
                 </div>
                 <div className="form-group">
                     <label>CNIC Picture</label>

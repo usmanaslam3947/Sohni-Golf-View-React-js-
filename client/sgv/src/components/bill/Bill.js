@@ -6,12 +6,18 @@ import Loader from '../common/Loader';
 import './Bill.css';
 import UpdateBill from './UpdateBill';
 import GenerateBill from '../common/GenerateBill';
+import Success from '../common/Success';
+import Failure from '../common/Failure';
 class Bill extends React.Component {
     constructor(props){
         super(props);
         this.state={
             bills:[],
             bill:null,
+            successStatus:false,
+            failureStatus:false,
+            msg:"",
+            desc:"",
             loader:false,
             create:false,
             display:true,
@@ -25,6 +31,10 @@ class Bill extends React.Component {
         return(
             <div>
                 <Navigation/>
+                
+                <Success object={this}/>
+                <Failure object={this}/>
+
                 {this.state.loader ? <Loader/>:null}
                 {/* { this.state.display ? :null} */}
                 <div className="container">

@@ -1,33 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Success from "../common/Success";
 import Failure from "../common/Failure";
-import {createBill} from './Service';
+import { createBill , getBillTypes } from './Service';
 export default function CreateBill(props) {
     const [billName,setBillName] = useState('');
     const [billAmount,setBillAmount] = useState();
     const [billDate,setBillDate] = useState(null);
     const [maxDate,setMaxDate] = useState(getTodayDate());
     const [minDate,setMinDate] = useState(getMinDate());
-    const [successStatus,setSuccessStatus] = useState(false);
-    const [failureStatus,setFailureStatus] = useState(false);
+    const [billTypes,setBillTypes] = useState([]);
+    
     const addBill = async(e) => {
         e.preventDefault();
         props.object.setState({loader:true});
         const bills = await createBill(billName,billAmount,billDate);
         props.object.setState({loader:false});
         if (bills.data.message.code ==200) {
-            setSuccessStatus(true);
+            props.object.state.successStatus = true;
+            props.object.state.msg = bills.data.message.message;
+            props.object.state.desc = bills.data.message.description;
         }else{
-            setFailureStatus(true);
+            props.object.state.failureStatus = true;
+            props.object.state.msg = bills.data.message.message;
+            props.object.state.desc = bills.data.message.description;
         }
     }
     
-    
+    useEffect(() => {
+        getAllBillTypes();
+    },[]);
+
+    const getAllBillTypes = async() => {
+        props.object.setState({loader:true});
+        const res = await getBillTypes();
+        props.object.setState({loader:false});
+        if (res.data.message.code === 200) {
+            setBillTypes(res.data.data);
+        }else{
+            props.object.state.failureStatus = true;
+            props.object.state.msg = res.data.message.message;
+            props.object.state.desc = res.data.message.description;
+        }
+    }
+
+    const onBillSelection = (e) => {
+        // alert(JSON.stringify(e));
+    }
     
     return(
         <div className="create">
-            {successStatus ? <Success/> : null}
-            {failureStatus ? <Failure/> : null}
             <div className="header">
                 <h1>Create Bill</h1>
                 {/* <button className="btn btn-secondary mt-1" onClick={()=>props.object.setState({create:false,display:true})}>X</button> */}
@@ -35,7 +56,15 @@ export default function CreateBill(props) {
             <form onSubmit={addBill}>
                 <div className="form-group mt-1">
                     <label>Bill Name</label>
-                    <input type="text" className="form-control w-75" placeholder="Please Enter Bill Name" value={billName} onChange={(e)=>setBillName(e.target.value)}/>
+                    {/* <input type="text" className="form-control w-75" placeholder="Please Enter Bill Name" value={billName} onChange={(e)=>setBillName(e.target.value)}/> */}
+                    <select className="form-select w-75" onChange={(e)=>setBillName(e.target.value)}>
+                        <option selected>Please select a bill</option>
+                        {billTypes && billTypes.length > 0 ? billTypes.map(billType => {
+                            return(
+                                <option value={billType.id}>{billType.type}</option>
+                            )
+                        }) : null}
+                    </select>
                 </div>
                 <div className="form-group mt-1">
                     <label>Amount</label>

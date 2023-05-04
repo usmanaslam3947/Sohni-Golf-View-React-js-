@@ -49,10 +49,27 @@
     width: 50%;
 }
 
+.PaidStampSection{
+    height: 120px;
+}
+
+.right-report-content .PaidStampSection img{
+
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    align-items: center;
+    /* margin-left: 40%; */
+}
+
 .right-report-content div img{
     width: 200px;
     height: 100px;
 }
+.PaidStampSection{
+    width: 100%;
+}
+
 
 .left-report-content div{
     display: flex;

@@ -1,5 +1,16 @@
 import axios from "axios";
 
+export async function getBillTypes() {
+    const result = await axios.post("http://localhost:8081/getAllBillTypes",{}).then(
+        response => {
+            return response;
+    }).catch(error => {
+        return error;
+    });
+    return result;
+}
+
+
 export async function getAllBills(){
     const result = await axios.post("http://localhost:8081/getBills",{}).then(response => {
         return response;

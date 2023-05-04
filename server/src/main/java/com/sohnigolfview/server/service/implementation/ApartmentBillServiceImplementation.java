@@ -35,7 +35,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
             List<ApartmentBill> apartmentBills =  apartBillRepo.getAllApartBill();
             if (apartmentBills.size() > 0) {
                 response.setData(apartmentBills);
-                setSuccessMsg();
+                setSuccessMsg("Apartment bill successfully retrieved");
             } else {
                 setErrorMsg();
             }
@@ -51,7 +51,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
             List<ApartmentBill> billsByApartment = apartBillRepo.getBillsByApartment(apartment.getId(), apartment.getStatus());
             if (billsByApartment.size() > 0){
                 response.setData(billsByApartment);
-                setSuccessMsg();
+                setSuccessMsg("Bills successfully retrieved by apartment");
             }else{
                 setErrorMsg();
             }
@@ -68,7 +68,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
             ApartmentBill apartmentBill = apartBillRepo.save(model);
             if (apartmentBill != null){
                 response.setData(apartmentBill);
-                setSuccessMsg();
+                setSuccessMsg("Apartment bills created successfully.");
             }else{
                 setErrorMsg();
             }
@@ -92,6 +92,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                         apartmentBill.setBillId(bill.getId());
                         apartmentBill.setStatus(0);
                         apartmentBill.setPaidAmount(0);
+                        apartmentBill.setAmount(bill.getAmount()/apartments.size());
                         apartmentBill.setCnicImage(null);
                         apartBillRepo.save(apartmentBill);
                     }
@@ -99,7 +100,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                 List<ApartmentBill> apartmentBills = apartBillRepo.findAll();
                 if (apartmentBills.size()>0){
                     response.setData(apartmentBills);
-                    setSuccessMsg();
+                    setSuccessMsg("Apartment bills processed successfully.");
                 }else{
                     setErrorMsg();
                 }
@@ -120,7 +121,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
             ApartmentBill apartmentBill = entityManager.merge(model);
             if(apartmentBill != null){
                 response.setData(apartmentBill);
-                setSuccessMsg();
+                setSuccessMsg("Apartment bill payed successfully");
             }else{
                 setErrorMsg();
             }

@@ -1,6 +1,5 @@
 package com.sohnigolfview.server.persistence.repository;
 
-import com.sohnigolfview.server.persistence.model.Apartment;
 import com.sohnigolfview.server.persistence.model.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public interface BillRepo extends JpaRepository<Bill,Integer> {
 
-    @Query(value = "SELECT * FROM bills b",nativeQuery = true)
+    @Query(value = "SELECT * FROM bills b inner join bill_types bt on b.type = bt.id",nativeQuery = true)
     List<Bill> getAllBills();
 
     @Query(value = "SELECT * from bills b where status=:status",nativeQuery = true)
@@ -29,7 +28,7 @@ public interface BillRepo extends JpaRepository<Bill,Integer> {
     @Transactional
     @Modifying
     @Query("UPDATE Bill SET type=:type,amount=:amount,created_date=:created_date,due_date=:due_date WHERE id=:billId")
-    int updateBill(@Param("type") String type, @Param("amount") Long amount,@Param("created_date") Date createdDate, @Param("due_date") Date dueDate, @Param("billId") Integer billId);
+    int updateBill(@Param("type") Integer type, @Param("amount") Long amount,@Param("created_date") Date createdDate, @Param("due_date") Date dueDate, @Param("billId") Integer billId);
 
     @Transactional
     @Modifying
@@ -38,4 +37,7 @@ public interface BillRepo extends JpaRepository<Bill,Integer> {
 
     @Query(value = "select * from bills where created_date=:createdDate",nativeQuery = true)
     List<Bill> getBillsByCreatedDate(@Param("createdDate") String createdDate);
+
+
+
 }
