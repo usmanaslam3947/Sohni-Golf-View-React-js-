@@ -57,8 +57,8 @@ export default function DisplayApartmentBill(props) {
                                 {/* <td>{apartmentBill.apartment.apartment_name}</td> */}
                                 <td><input type="checkbox" onChange={(e)=>addCheckedApartments(e,apartmentBill)}/></td>
                                 <td>{apartmentBill.bill.billType.type}</td>
-                                <td>{apartmentBill.bill.created_date.slice(0,10)}</td>
-                                <td>{apartmentBill.bill.due_date.slice(0,10)}</td>
+                                <td>{new Date(apartmentBill.bill.created_date).getDate()} {new Date(apartmentBill.bill.created_date).toLocaleString("default", { month: "long" })} {new Date(apartmentBill.bill.created_date).getFullYear()}</td>
+                                <td>{new Date(apartmentBill.bill.due_date).getDate()} {new Date(apartmentBill.bill.due_date).toLocaleString("default", { month: "long" })} {new Date(apartmentBill.bill.due_date).getFullYear()}</td>
                                 <td>{apartmentBill.amount}</td>
                                 <td>{apartmentBill.paidAmount}</td>
                                 <td>{apartmentBill.status == 1 ? apartmentBill.payeeName:"Not Paid Yet"}</td>

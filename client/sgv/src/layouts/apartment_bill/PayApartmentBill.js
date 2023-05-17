@@ -16,7 +16,7 @@ export default function PayApartmentBill(props) {
         if (payeeName == "") {
             props.object.setState({msg:"Failed !!!",desc:"Please enter payee name."});
             props.object.setState({failureStatus:true});
-        }else if (payeeCnic == "") {
+        }else if (payeeCnic == "" || payeeCnic.length < 13) {
             props.object.setState({msg:"Failed !!!",desc:"Please enter payee cnic."});
             props.object.setState({failureStatus:true});
         }else if (base64Image == "") {
@@ -27,8 +27,8 @@ export default function PayApartmentBill(props) {
             //     props.object.setState({msg:"Please select correct image ..."});
             //     props.object.setState({failureStatus:true});
             // }
-        }else if (payingAmount == "" || payingAmount < props.object.state.selectedApartmentBill.amount) {
-            props.object.setState({msg:"Failed !!!",desc:"Please enter correct amount."});
+        }else if (payingAmount == "" || payingAmount != props.object.state.selectedApartmentBill.amount) {
+            props.object.setState({msg:"Failed",desc:"Please enter correct amount."});
             props.object.setState({failureStatus:true});
         }else {
             props.object.state.loader = true;

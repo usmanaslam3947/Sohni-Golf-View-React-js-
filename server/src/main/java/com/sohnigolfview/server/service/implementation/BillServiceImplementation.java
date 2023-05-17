@@ -25,7 +25,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(bills);
                 setSuccessMsg("Bills retrieved successfully");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve bills.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -41,7 +41,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(bill);
                 setSuccessMsg("Bills successfully retrieved by id.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve bills id.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -57,7 +57,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(bills);
                 setSuccessMsg("Bills successfully retrieved by status.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve bills by status.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -73,7 +73,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(billRepo.getAllBills());
                 setSuccessMsg("Bill created successfully.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to create bill.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -92,7 +92,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(billRepo.getBillById(model.getId()));
                 setSuccessMsg("Bill updated successfully.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to update bill.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -110,7 +110,7 @@ public class BillServiceImplementation extends BaseServiceImplementation impleme
 
                 setSuccessMsg("Bill status changed successfully.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to change bill status.");
             }
         }catch (Exception exception){
             setException(exception);

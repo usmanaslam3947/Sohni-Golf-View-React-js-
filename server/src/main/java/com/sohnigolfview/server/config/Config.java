@@ -2,7 +2,8 @@ package com.sohnigolfview.server.config;
 
 public class Config {
 
-    public static String errMsg = "Some Internal Error";
+    public static String errMsg = "Error";
+    public static String errDesc = "Some internal error";
     public static Integer errCode = 500;
 
     public static String successMsg = "Success";

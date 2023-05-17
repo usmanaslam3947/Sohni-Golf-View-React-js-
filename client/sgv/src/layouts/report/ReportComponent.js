@@ -35,30 +35,30 @@ class ReportComponent extends React.Component{
                                 <label>Apartment : </label>
                                 <p>{apart.apartment.apartment_name}</p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <label>Bill Id : </label>
                                 <p>1</p>
-                            </div>
+                            </div> */}
                             <div>
                                 <label>Bill Name : </label>
-                                <p>{apart.bill.type}</p>
+                                <p>{apart.bill.billType.type}</p>
                             </div>
                             <div>
                                 <label>Due Date : </label>
                                 <p>{new Date(apart.bill.due_date).toLocaleString("default",{month:"long"})+" "+ new Date(apart.bill.due_date).getFullYear()}</p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <label>Units Consumed : </label>
                                 <p>10 Ltr</p>
-                            </div>
+                            </div> */}
                             <div>
                                 <label>Amount Payable : </label>
-                                <p>{apart.bill.amount}</p>
+                                <p>{apart.amount}</p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <label>Late Fees : </label>
                                 <p>-</p>
-                            </div>
+                            </div> */}
                             <div>
                                 <label>Bill Status : </label>
                                 <p>{apart.status == 1 ? "Paid" : "Not Paid"}</p>
@@ -67,15 +67,15 @@ class ReportComponent extends React.Component{
                         <div className="right-report-content">
                             <div>
                                 <label>Payee Name : </label>
-                                <p>{apart.payeeName}</p>
+                                <p>{apart.payeeName && apart.payeeName!="" ? apart.payeeName :" - "}</p>
                             </div>
                             <div>
                                 <label>Payee Cnic : </label>
-                                <p>{apart.payeeCnic}</p>
+                                <p>{apart.payeeCnic && apart.payeeCnic!="" ? apart.payeeCnic :" - "}</p>
                             </div>
                             <div>
                                 <label>Payee Contact Number : </label>
-                                <p>{apart.apartment.contact}</p>
+                                <p>{ apart.status == 1 ? apart.apartment.contact : " - "}</p>
                             </div>
                             <div>
                                 <label>Cnic Picture : </label>

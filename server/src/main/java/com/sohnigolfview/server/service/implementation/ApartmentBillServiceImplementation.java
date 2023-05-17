@@ -37,7 +37,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                 response.setData(apartmentBills);
                 setSuccessMsg("Apartment bill successfully retrieved");
             } else {
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve apartment bills.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -53,7 +53,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                 response.setData(billsByApartment);
                 setSuccessMsg("Bills successfully retrieved by apartment");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve bills.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -70,7 +70,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                 response.setData(apartmentBill);
                 setSuccessMsg("Apartment bills created successfully.");
             }else{
-                setErrorMsg();
+                setErrorMsg("Error creating apartment bills.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -102,10 +102,10 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                     response.setData(apartmentBills);
                     setSuccessMsg("Apartment bills processed successfully.");
                 }else{
-                    setErrorMsg();
+                    setErrorMsg("Unable to process apartment bills.");
                 }
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve bills.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -123,7 +123,7 @@ public class ApartmentBillServiceImplementation extends BaseServiceImplementatio
                 response.setData(apartmentBill);
                 setSuccessMsg("Apartment bill payed successfully");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to pay apartment bills.");
             }
         }catch (Exception e){
             setException(e);

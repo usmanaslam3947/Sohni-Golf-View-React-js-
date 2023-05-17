@@ -24,7 +24,7 @@ class Apartment extends React.Component {
             contact: "",
             status: 0,
             successStatus:false,
-            failureStatus:true,
+            failureStatus:false,
             msg:"",
             desc:"",
             person_name: "",

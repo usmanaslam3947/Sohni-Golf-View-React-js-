@@ -19,8 +19,12 @@ public class BillTypeServiceImplementation extends BaseServiceImplementation imp
         try{
 //            List<BillType> billTypes = billTypeRepo.getAllBillTypes();
             List<BillType> billTypes = billTypeRepo.findAll();
-            response.setData(billTypes);
-            setSuccessMsg("Success");
+            if (billTypes.size() > 0){
+                response.setData(billTypes);
+                setSuccessMsg("Bill types retrieved successfully.");
+            }else{
+                setErrorMsg("Unable to retrieve bill types.");
+            }
         }catch (Exception e){
             setException(e);
         }

@@ -13,14 +13,22 @@ export default function GenerateBill(props) {
         e.preventDefault();
         if (billDate === '') {
             // alert("Please select date ... ");
-            props.object.setState({failureStatus:true,msg:"Please select date ..."});
+            props.object.setState({failureStatus:true,msg:"Failed",desc:"Please select date."});
             return;
         }
         const res = await generateBills(billDate);
         if (res.data.message.code === 200) {
-            props.object.setState({successStatus:true,msg:res.data.message.message});
+            props.object.setState({
+                successStatus:true,
+                msg:res.data.message.message,
+                desc:res.data.message.description
+            });
         } else {
-            props.object.setState({failureStatus:true,msg:res.data.message.message});
+            props.object.setState({
+                failureStatus:true,
+                msg:res.data.message.message,
+                desc:res.data.message.description
+            });
         }
     }
     return(

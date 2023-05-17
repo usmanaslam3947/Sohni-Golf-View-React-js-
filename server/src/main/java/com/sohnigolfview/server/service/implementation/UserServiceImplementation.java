@@ -24,7 +24,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(users);
                 setSuccessMsg("Users retrieved successfully.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve users.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -40,7 +40,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(users);
                 setSuccessMsg("Users retrieved successfully by id.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve users by id.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -56,7 +56,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(users);
                 setSuccessMsg("Users retrieved successfully by status.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve users by status.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -73,7 +73,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(userRepo.findAll());
                 setSuccessMsg("User created successfully.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to create users.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -90,7 +90,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(users);
                 setSuccessMsg("User updated successfully.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to update users.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -106,7 +106,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(userRepo.getUserById(model.getId()));
                 setSuccessMsg("User status changed successfully.");
             }else {
-                setErrorMsg();
+                setErrorMsg("Unable to change user status.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -122,7 +122,7 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
                 response.setData(users);
                 setSuccessMsg("User login successfully.");
             }else{
-                setErrorMsg();
+                setErrorMsg("User login failed.");
             }
         }catch (Exception exception){
             setException(exception);

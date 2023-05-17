@@ -23,7 +23,7 @@ public class BaseServiceImplementation implements BaseService {
         System.out.println("Exception : "+exception);
         response.getMessage().setCode(Config.errCode);
         response.getMessage().setMessage(Config.errMsg);
-        response.getMessage().setDescription(Config.errMsg);
+        response.getMessage().setDescription(Config.errDesc);
     }
 
     public void setSuccessMsg(String desc){
@@ -32,11 +32,11 @@ public class BaseServiceImplementation implements BaseService {
         response.getMessage().setDescription(desc);
     }
 
-    public void setErrorMsg(){
+    public void setErrorMsg(String desc){
         response.setData(null);
         response.getMessage().setCode(Config.notFoundCode);
         response.getMessage().setMessage(Config.notFoundMsg);
-        response.getMessage().setDescription(Config.notFoundMsg);
+        response.getMessage().setDescription(desc);
     }
 
 }

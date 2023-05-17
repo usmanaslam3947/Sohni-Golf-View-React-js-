@@ -31,7 +31,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
                 response.setData(apartments);
                 setSuccessMsg("Apartment successfully retrieved");
             } else {
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve apartments.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -46,9 +46,9 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
         try{
             if (apartment != null){
                 response.setData(apartment);
-                setSuccessMsg("Apartment successfully retrieved by status");
+                setSuccessMsg("Apartment successfully retrieved by id");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve apartment by id.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -65,7 +65,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
                 response.setData(apartmentsByStatus);
                 setSuccessMsg("Apartment successfully retrieved by status");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to retrieve apartments by status.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -81,7 +81,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
                 response.setData(apartmentRepo.findAll());
                 setSuccessMsg("Apartment successfully created");
             } else {
-                setErrorMsg();
+                setErrorMsg("Unable to create apartment.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -100,7 +100,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
                 response.setData(apartmentRepo.findAll());
                 setSuccessMsg("Apartment updated successfully");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to update apartment.");
             }
         }catch (Exception exception){
             setException(exception);
@@ -116,7 +116,7 @@ public class ApartmentServiceImplementation extends BaseServiceImplementation im
                 response.setData(apartmentRepo.findAll());
                 setSuccessMsg("Apartment status successfully changed");
             }else{
-                setErrorMsg();
+                setErrorMsg("Unable to change apartment status.");
             }
         }catch (Exception exception){
             setException(exception);

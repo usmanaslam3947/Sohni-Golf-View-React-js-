@@ -18,7 +18,7 @@ export default function Failure(props) {
             { showComponent ? 
                 <div className="alert alert-danger">
                     
-                    <strong>{props.object.state.msg}!</strong> {props.object.state.desc}
+                    <strong>{props.object.state.msg} !</strong> {props.object.state.desc}
                 </div> :
                 null
             }

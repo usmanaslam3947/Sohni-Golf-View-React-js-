@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {createApartmentService} from './Service';
 import Apartment from './Apartment';
 import {useState} from 'react';
 import OpenEye from '../../assets/eye.png';
@@ -17,28 +18,65 @@ function CreateApartment (props){
     const [confirmPasswordEyeIcon,setConfirmPasswordEyeIcon] = useState(false);
     const [maxLength,setMaxLength] = useState(11);
 
-    const createApartment=(e)=>{
+    const createApartment=async(e)=>{
         e.preventDefault();
-        props.object.showLoader();
-        axios.post('http://localhost:8081/createApartment',{
-            "apartment_name": apartmentName,
-            "contact": contact,
-            "status": 1,
-            "person_name": personName,
-            "password": password
-        }).then(response => {
+        if(apartmentName == ""){
+            props.object.setState({
+                failureStatus:true,
+                msg:"Failed",
+                desc:"Not a valid mobile number."
+            });
+        }else if (contact.length < 11) {
+            props.object.setState({
+                failureStatus:true,
+                msg:"Failed",
+                desc:"Not a valid mobile number."
+            });
+        }else{
+            props.object.showLoader();
+            const res = await createApartmentService(apartmentName,contact,personName,password);
             props.object.hideLoader();
-            if (response.data.message.code === 200) {
-                props.object.setState({successStatus:true,msg:response.data.message.message,desc:response.data.message.description});                
-                props.createdApartment(response.data.data);
+            if (res.data.message.code === 200) {
+                props.object.setState({
+                    successStatus:true,
+                    msg:res.data.message.message,
+                    desc:res.data.message.description
+                });                
+                props.createdApartment(res.data.data);
+                clearFields();
             }else{
-                props.object.setState({failureStatus:true,msg:response.data.message.message,desc:response.data.message.description});
+                props.object.setState({
+                    failureStatus:true,
+                    msg:res.data.message.message,
+                    desc:res.data.message.description
+                });
             }
-        }).catch(error => {
-            console.log(error);
-        });
+        }
+        // axios.post('http://localhost:8081/createApartment',{
+        //     "apartment_name": apartmentName,
+        //     "contact": contact,
+        //     "status": 1,
+        //     "person_name": personName,
+        //     "password": password
+        // }).then(response => {
+        //     props.object.hideLoader();
+        //     if (response.data.message.code === 200) {
+        //         props.object.setState({successStatus:true,msg:response.data.message.message,desc:response.data.message.description});                
+        //         props.createdApartment(response.data.data);
+        //     }else{
+        //         props.object.setState({failureStatus:true,msg:response.data.message.message,desc:response.data.message.description});
+        //     }
+        // }).catch(error => {
+        //     console.log(error);
+        // });
     }
-
+    const clearFields = () => {
+        setApartmentName("");
+        setContact("");
+        setPersonName("");
+        setPassword("");
+        setConfirmPassword("");
+    }
     // showLoader = () => {
     //     props.object.setState({loader:true});
     // }

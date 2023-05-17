@@ -1,11 +1,11 @@
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import Home from '../home/Home';
-import Login from '../login/Login';
-import Apartment from '../apartment/Apartment';
-import Bill from '../bill/Bill';
-import Navigation from '../navigation/Navigation';
+import Home from '../layouts/home/Home';
+import Login from '../layouts/login/Login';
+import Apartment from '../layouts/apartment/Apartment';
+import Bill from '../layouts/bill/Bill';
+import Navigation from '../layouts/navigation/Navigation';
 import { useEffect, useState } from 'react';
-import ApartmentBill from '../apartment_bill/ApartmentBill';
+import ApartmentBill from '../layouts/apartment_bill/ApartmentBill';
 function Router(props) {
     // const [loggedIn,setLoggedIn] = useState(false);
     // useEffect(()=>{
