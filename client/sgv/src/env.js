@@ -1,4 +1,6 @@
-var code = 200;
+const config = {
+    BASE_URL: "http://localhost:8081"
+};
 
 
-export default code;
+export default config;

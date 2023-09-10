@@ -3,8 +3,11 @@ package com.sohnigolfview.server.service.implementation;
 import com.sohnigolfview.server.base.response.Response;
 import com.sohnigolfview.server.persistence.model.User;
 import com.sohnigolfview.server.persistence.repository.UserRepo;
+import com.sohnigolfview.server.security1.JwtTokenUtil;
 import com.sohnigolfview.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -114,12 +117,20 @@ public class UserServiceImplementation extends BaseServiceImplementation impleme
         return response;
     }
 
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private UserDetailsService userDetailsService;
     @Override
     public Response login(User model) throws Exception {
         try{
+            Boolean isAuthenticated = false;
             List<User> users = userRepo.login(model.getUser_name(), model.getPassword());
             if (users.size() > 0){
-                response.setData(users);
+                final UserDetails userDetails = userDetailsService.loadUserByUsername(model.getUser_name());
+                final String token = jwtTokenUtil.generateToken(userDetails);
+                response.setData(token);
                 setSuccessMsg("User login successfully.");
             }else{
                 setErrorMsg("User login failed.");

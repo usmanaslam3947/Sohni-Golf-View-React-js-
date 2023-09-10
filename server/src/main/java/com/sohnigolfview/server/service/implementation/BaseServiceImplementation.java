@@ -35,7 +35,7 @@ public class BaseServiceImplementation implements BaseService {
     public void setErrorMsg(String desc){
         response.setData(null);
         response.getMessage().setCode(Config.notFoundCode);
-        response.getMessage().setMessage(Config.notFoundMsg);
+        response.getMessage().setMessage(Config.errMsg);
         response.getMessage().setDescription(desc);
     }
 

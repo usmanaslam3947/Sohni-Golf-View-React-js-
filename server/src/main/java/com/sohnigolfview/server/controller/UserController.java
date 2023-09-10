@@ -1,12 +1,17 @@
 package com.sohnigolfview.server.controller;
 
 import com.sohnigolfview.server.base.Base;
+import com.sohnigolfview.server.base.response.JwtResponse;
 import com.sohnigolfview.server.base.response.Response;
+import com.sohnigolfview.server.config.Config;
 import com.sohnigolfview.server.persistence.model.Bill;
 import com.sohnigolfview.server.persistence.model.User;
+import com.sohnigolfview.server.security1.JwtTokenUtil;
 import com.sohnigolfview.server.service.BillService;
 import com.sohnigolfview.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,6 +57,8 @@ public class UserController extends BaseController {
     public Response changeUserStatus(@RequestBody User user) throws Exception{
         return userService.changeUserStatus(user);
     }
+
+
 
     @PostMapping(value = "/login")
     public Response login(@RequestBody User user) throws Exception{

@@ -13,4 +13,5 @@ public class Config {
 
     public static Integer notFoundCode = 404;
     public static String notFoundMsg = "No Data Found";
+
 }

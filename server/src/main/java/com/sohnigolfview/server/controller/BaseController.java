@@ -3,12 +3,16 @@ package com.sohnigolfview.server.controller;
 import com.sohnigolfview.server.base.response.Response;
 import com.sohnigolfview.server.config.Config;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 public class BaseController {
     protected String hashPassword(String plainPass){
-        String salt = "abcd1234";
+//        String salt = "abcd1234";
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hashedPassword = encoder.encode(plainPass + salt);
+//        String hashedPassword = encoder.encode(plainPass+salt);
+        String hashedPassword = encoder.encode(plainPass);
+        System.out.println(hashedPassword);
         return hashedPassword;
     }
 

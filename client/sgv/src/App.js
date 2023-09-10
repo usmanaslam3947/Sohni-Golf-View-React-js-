@@ -1,10 +1,9 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import Router from './components/router/Router';
+import Router from './router/Router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Redirect, useHistory } from 'react-router-dom';
 import Login from './components/login/Login';
-import ReportComponent from './components/report/ReportComponent';
 
 function App () {
   const [login,setLogin] = useState(false);

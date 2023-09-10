@@ -1,11 +1,12 @@
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import Home from '../layouts/home/Home';
-import Login from '../layouts/login/Login';
-import Apartment from '../layouts/apartment/Apartment';
-import Bill from '../layouts/bill/Bill';
-import Navigation from '../layouts/navigation/Navigation';
+import Home from '../components/home/Home';
+import Login from '../components/login/Login';
+import Apartment from '../components/apartment/Apartment';
+import Bill from '../components/bill/Bill';
+// import Navigation from '../components/navigation/Navigation';
 import { useEffect, useState } from 'react';
-import ApartmentBill from '../layouts/apartment_bill/ApartmentBill';
+import ApartmentBill from '../components/apartment_bill/ApartmentBill';
+import BalanceSheet from '../components/balance_sheet/BalanceSheet';
 function Router(props) {
     // const [loggedIn,setLoggedIn] = useState(false);
     // useEffect(()=>{
@@ -35,6 +36,9 @@ function Router(props) {
                 </Route>
                 <Route path="/apartmentBill/:id">
                     <ApartmentBill/>
+                </Route>
+                <Route path="/balanceSheet">
+                    <BalanceSheet/>
                 </Route>
                 <Route path="/login">
                 {/* {loggedIn ? <Redirect to="/"/> : <Login/>} */}
